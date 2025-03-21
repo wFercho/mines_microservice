@@ -23,14 +23,31 @@ clean:
 
 DOCKER_COMPOSE_DIR = build/docker
 
-run-docker-dev:
-	@docker compose --env-file .env.local --profile development -f $(DOCKER_COMPOSE_DIR)/docker-compose.yml up -d
+build-docker:
+	@echo "Building Docker images without cache..."
+	@docker compose -f $(DOCKER_COMPOSE_DIR)/docker-compose.yml build --no-cache
 
-run-docker-prod:
+build-docker-dev:
+	@echo "Building Docker images without cache..."
+	@docker compose --env-file .env.local --profile development -f $(DOCKER_COMPOSE_DIR)/docker-compose.yml build --no-cache
+
+run-docker-dev: stop-docker-dev build-docker-dev
+	@echo "Starting Docker containers for development..."
+	@docker compose --env-file .env.local --profile development -f $(DOCKER_COMPOSE_DIR)/docker-compose.yml up -d
+	
+stop-docker-dev:
+	@echo "Stopping Docker containers and removing volumes..."
+	@docker compose --env-file .env.local --profile development -f $(DOCKER_COMPOSE_DIR)/docker-compose.yml down -v || true
+
+run-docker-prod: build-docker
+	@echo "Starting Docker containers for production..."
 	@docker compose --env-file .env.production --profile production -f $(DOCKER_COMPOSE_DIR)/docker-compose.yml up -d
 
 stop-docker:
+	@echo "Stopping all Docker containers..."
 	@docker compose -f $(DOCKER_COMPOSE_DIR)/docker-compose.yml down
 
-.PHONY: build run test clean
+reset-db: stop-docker-dev run-docker-dev
+	@echo "Database has been reset!"
 
+.PHONY: build run test clean build-docker run-docker-dev stop-docker-dev run-docker-prod stop-docker reset-db

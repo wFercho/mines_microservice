@@ -1,3 +1,10 @@
-FROM postgres:15
+FROM postgis/postgis:13-3.5
+# RUN apt-get update && apt-get install -y postgis postgresql-14-postgis-3
 
-COPY init.sql /docker-entrypoint-initdb.d/
+# RUN apt-get update && apt-get install -y postgresql-14-postgis-3  
+# COPY init.sql /docker-entrypoint-initdb.d/
+# CMD ["/usr/local/bin/docker-entrypoint.sh","postgres"]
+
+
+
+
