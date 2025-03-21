@@ -21,5 +21,16 @@ clean:
 	@echo "Cleaning up..."
 	@rm -rf $(BIN_DIR)
 
+DOCKER_COMPOSE_DIR = build/docker
+
+run-docker-dev:
+	@docker compose --env-file .env.local --profile development -f $(DOCKER_COMPOSE_DIR)/docker-compose.yml up -d
+
+run-docker-prod:
+	@docker compose --env-file .env.production --profile production -f $(DOCKER_COMPOSE_DIR)/docker-compose.yml up -d
+
+stop-docker:
+	@docker compose -f $(DOCKER_COMPOSE_DIR)/docker-compose.yml down
+
 .PHONY: build run test clean
 

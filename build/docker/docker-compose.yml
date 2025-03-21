@@ -2,16 +2,15 @@ services:
   postgres:
     build:
       context: ./postgres
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.postgres
     container_name: postgres_mines
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: mines_db
     ports:
       - "5434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    # env_file:
+    #   - ../../.env
+    #   - ../../.env.local
     profiles:
       - development
       - test
@@ -26,6 +25,8 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
+    # env_file:
+    #   - ../../.env.local
     profiles:
       - test
       - production
