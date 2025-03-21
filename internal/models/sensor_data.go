@@ -15,6 +15,5 @@ type SensorData struct {
 }
 
 func (sd *SensorData) BeforeCreate(tx *gorm.DB) (err error) {
-	// Aquí podrías implementar lógica de validación, por ejemplo, para las alertas.
 	return nil
 }

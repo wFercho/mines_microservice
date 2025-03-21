@@ -12,6 +12,5 @@ type Sensor struct {
 }
 
 func (s *Sensor) BeforeCreate(tx *gorm.DB) (err error) {
-	// Puedes agregar validaciones o inicializaciones antes de guardar
 	return nil
 }

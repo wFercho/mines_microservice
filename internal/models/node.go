@@ -15,6 +15,5 @@ type Node struct {
 }
 
 func (n *Node) BeforeCreate(tx *gorm.DB) (err error) {
-	// Puedes incluir validaciones o lógica adicional antes de guardar el nodo
 	return nil
 }

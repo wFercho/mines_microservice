@@ -7,7 +7,10 @@ import (
 	"gorm.io/gorm"
 
 	"github.com/wFercho/mines_microservice/internal/config"
+	"github.com/wFercho/mines_microservice/internal/models"
 )
+
+var DB *gorm.DB
 
 func ConnectDatabase() (*gorm.DB, error) {
 	cfg := config.LoadConfig()
@@ -19,5 +22,11 @@ func ConnectDatabase() (*gorm.DB, error) {
 		return nil, err
 	}
 
+	err = db.AutoMigrate(&models.Mine{})
+	if err != nil {
+		log.Fatal("❌ Error en la migración:", err)
+	}
+
+	DB = db
 	return db, nil
 }
