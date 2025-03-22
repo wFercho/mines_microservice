@@ -9,29 +9,31 @@ import (
 )
 
 type Config struct {
-	DBUser     string
-	DBPassword string
-	DBName     string
-	DBHost     string
-	DBPort     string
-	AppPort    string
-	MQTTBroker string
+	DBUser      string
+	DBPassword  string
+	DBName      string
+	DBHost      string
+	DBPort      string
+	AppPort     string
+	MQTTBroker  string
+	Environment string
 }
 
 func LoadConfig() *Config {
 
-	if err := godotenv.Load(); err != nil {
+	if err := godotenv.Load(".env.local"); err != nil {
 		log.Println("No se pudo cargar el archivo .env, usando variables de entorno del sistema")
 	}
 
 	return &Config{
-		DBUser:     os.Getenv("POSTGRES_USER"),
-		DBPassword: os.Getenv("POSTGRES_PASSWORD"),
-		DBName:     os.Getenv("POSTGRES_DB"),
-		DBHost:     os.Getenv("POSTGRES_HOST"),
-		DBPort:     os.Getenv("POSTGRES_PORT"),
-		AppPort:    os.Getenv("APP_PORT"),
-		MQTTBroker: os.Getenv("MQTT_BROKER"),
+		DBUser:      os.Getenv("POSTGRES_USER"),
+		DBPassword:  os.Getenv("POSTGRES_PASSWORD"),
+		DBName:      os.Getenv("POSTGRES_DB"),
+		DBHost:      os.Getenv("POSTGRES_HOST"),
+		DBPort:      os.Getenv("POSTGRES_PORT"),
+		AppPort:     os.Getenv("APP_PORT"),
+		MQTTBroker:  os.Getenv("MQTT_BROKER"),
+		Environment: os.Getenv("ENVIRONMENT"),
 	}
 }
 
