@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"github.com/wFercho/mines_microservice/internal/db"
+	db "github.com/wFercho/mines_microservice/internal/db/postgres"
 	"github.com/wFercho/mines_microservice/internal/models"
 )
 

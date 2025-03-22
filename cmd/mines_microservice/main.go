@@ -8,7 +8,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/wFercho/mines_microservice/internal/config"
-	"github.com/wFercho/mines_microservice/internal/db"
+	db "github.com/wFercho/mines_microservice/internal/db/postgres"
 	"github.com/wFercho/mines_microservice/internal/routes"
 )
 
