@@ -35,9 +35,13 @@ run-docker-dev: stop-docker-dev build-docker-dev
 	@echo "Starting Docker containers for development..."
 	@docker compose --env-file .env.local --profile development -f $(DOCKER_COMPOSE_DIR)/docker-compose.yml up -d
 	
-stop-docker-dev:
+stop-docker-dev-volumes:
 	@echo "Stopping Docker containers and removing volumes..."
 	@docker compose --env-file .env.local --profile development -f $(DOCKER_COMPOSE_DIR)/docker-compose.yml down -v || true
+
+stop-docker-dev:
+	@echo "Stopping Docker containers"
+	@docker compose --env-file .env.local --profile development -f $(DOCKER_COMPOSE_DIR)/docker-compose.yml down || true
 
 run-docker-prod: build-docker
 	@echo "Starting Docker containers for production..."
