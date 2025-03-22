@@ -10,9 +10,9 @@ import (
 	"github.com/wFercho/mines_microservice/internal/models"
 )
 
-var DB *gorm.DB
+var POSTGRES_DB *gorm.DB
 
-func ConnectDatabase() (*gorm.DB, error) {
+func ConnectToPostgresDatabase() (*gorm.DB, error) {
 	cfg := config.LoadConfig()
 	dsn := cfg.GetPostgresDatabaseURL()
 
@@ -27,6 +27,6 @@ func ConnectDatabase() (*gorm.DB, error) {
 		log.Fatal("❌ Error en la migración:", err)
 	}
 
-	DB = db
+	POSTGRES_DB = db
 	return db, nil
 }

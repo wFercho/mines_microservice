@@ -33,7 +33,7 @@ func SeedDB() {
 	}
 
 	for _, mine := range mines {
-		result := DB.Create(&mine)
+		result := POSTGRES_DB.Create(&mine)
 		if result.Error != nil {
 			log.Printf("❌ Error al insertar mina %s: %v", mine.Nombre, result.Error)
 		}

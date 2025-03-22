@@ -7,6 +7,6 @@ import (
 
 func GetAllMines() ([]models.Mine, error) {
 	var mines []models.Mine
-	result := db.DB.Find(&mines)
+	result := db.POSTGRES_DB.Find(&mines)
 	return mines, result.Error
 }

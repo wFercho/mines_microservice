@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	db.ConnectDatabase()
+	db.ConnectToPostgresDatabase()
 
 	if config.LoadConfig().Environment == "dev" {
 		db.SeedDB()
