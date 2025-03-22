@@ -12,7 +12,7 @@ services:
     ports:
       - "5434:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mines_postgres_data:/var/lib/postgresql/data
     # env_file:
     #   - ../../.env
     #   - ../../.env.local
@@ -37,4 +37,4 @@ services:
       - production
 
 volumes:
-  postgres_data:
+  mines_postgres_data:
