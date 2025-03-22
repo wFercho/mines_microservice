@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -9,11 +8,8 @@ import (
 )
 
 type Config struct {
-	DBUser      string
-	DBPassword  string
-	DBName      string
-	DBHost      string
-	DBPort      string
+	Postgres    PostgresConf
+	MongoDB     MongoDBConf
 	AppPort     string
 	MQTTBroker  string
 	Environment string
@@ -26,18 +22,22 @@ func LoadConfig() *Config {
 	}
 
 	return &Config{
-		DBUser:      os.Getenv("POSTGRES_USER"),
-		DBPassword:  os.Getenv("POSTGRES_PASSWORD"),
-		DBName:      os.Getenv("POSTGRES_DB"),
-		DBHost:      os.Getenv("POSTGRES_HOST"),
-		DBPort:      os.Getenv("POSTGRES_PORT"),
+		Postgres: PostgresConf{
+			DBUser:     os.Getenv("POSTGRES_USER"),
+			DBPassword: os.Getenv("POSTGRES_PASSWORD"),
+			DBName:     os.Getenv("POSTGRES_DB"),
+			DBHost:     os.Getenv("POSTGRES_HOST"),
+			DBPort:     os.Getenv("POSTGRES_PORT"),
+		},
+		MongoDB: MongoDBConf{
+			DBUser:     os.Getenv("MONGO_USERNAME"),
+			DBPassword: os.Getenv("MONGO_PASSWORD"),
+			DBName:     os.Getenv("MONGO_DATABASE"),
+			DBHost:     os.Getenv("MONGO_HOST"),
+			DBPort:     os.Getenv("MONGO_PORT"),
+		},
 		AppPort:     os.Getenv("APP_PORT"),
 		MQTTBroker:  os.Getenv("MQTT_BROKER"),
 		Environment: os.Getenv("ENVIRONMENT"),
 	}
-}
-
-func (c *Config) GetPostgresDatabaseURL() string {
-	return fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable",
-		c.DBUser, c.DBPassword, c.DBHost, c.DBPort, c.DBName)
 }
