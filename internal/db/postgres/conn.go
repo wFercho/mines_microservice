@@ -3,14 +3,10 @@ package db
 import (
 	"log"
 
+	"github.com/wFercho/mines_microservice/internal/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-
-	"github.com/wFercho/mines_microservice/internal/config"
-	"github.com/wFercho/mines_microservice/internal/models"
 )
-
-var POSTGRES_DB *gorm.DB
 
 func ConnectToPostgresDatabase() (*gorm.DB, error) {
 	cfg := config.LoadConfig()
@@ -22,11 +18,10 @@ func ConnectToPostgresDatabase() (*gorm.DB, error) {
 		return nil, err
 	}
 
-	err = db.AutoMigrate(&models.Mine{})
+	err = db.AutoMigrate(&MinePostgresModel{})
 	if err != nil {
 		log.Fatal("❌ Error en la migración:", err)
 	}
 
-	POSTGRES_DB = db
 	return db, nil
 }
