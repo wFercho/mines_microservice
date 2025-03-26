@@ -43,16 +43,19 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 
-	corsHandler := cors.New(cors.Options{
-		AllowedOrigins:   []string{"*"}, // Permite todos los orígenes
-		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
-		ExposedHeaders:   []string{"Link"},
-		AllowCredentials: true,
-		MaxAge:           300, // Maximum value not ignored by any of major browsers
-	})
+	if config.LoadConfig().Environment == "dev" {
+		corsHandler := cors.New(cors.Options{
+			AllowedOrigins:   []string{"*"}, // Permite todos los orígenes
+			AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+			AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
+			ExposedHeaders:   []string{"Link"},
+			AllowCredentials: true,
+			MaxAge:           300, // Maximum value not ignored by any of major browsers
+		})
 
-	r.Use(corsHandler.Handler)
+		r.Use(corsHandler.Handler)
+	}
+
 	routes.RegisterMinesRoutes(r, mineHandler)
 	routes.RegisterMineNodes3DRoutes(r, mineNodes3dHandler)
 
