@@ -16,5 +16,4 @@ make run-docker-dev
 
 ````bash
 make run
-```a
 ````
