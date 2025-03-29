@@ -4,7 +4,7 @@ Este microservicio hace parte de la implementación de la capa de aplicación de
 
 ## Ejecución (development)
 
-1. Tener instalado [Make](https://www.gnu.org/software/make/) y [Go](https://go.dev/) (más adelante se incluirá un Dockerfile para que no se tenga que instalar Go directamente)
+1. Tener instalado [Make](https://www.gnu.org/software/make/)
 2. Copiar **.env.example** y renombrarlo a **.env.local** ingresando las variables indicadas en este.
 3. Construir los contenedores de Docker necesarios
 
@@ -14,6 +14,6 @@ make run-docker-dev
 
 4. Levantar el servidor de desarrollo:
 
-````bash
+```bash
 make run
-````
+```
