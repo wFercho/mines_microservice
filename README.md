@@ -8,8 +8,16 @@ Este microservicio hace parte de la implementación de la capa de aplicación de
 2. Copiar **.env.example** y renombrarlo a **.env.local** ingresando las variables indicadas en este.
 3. Construir los contenedores de Docker necesarios
 
+##### Usando "docker compose"
+
 ```bash
 make run-docker-dev
+```
+
+##### Usando "docker-compose"
+
+```bash
+make run-docker-dev-prev
 ```
 
 4. Levantar el servidor de desarrollo:
