@@ -51,7 +51,7 @@ stop-docker:
 	@echo "Stopping all Docker containers..."
 	@docker compose -f $(DOCKER_COMPOSE_DIR)/docker-compose.yml down
 
-reset-db: stop-docker-dev-volumes run-docker-dev
+reset-docker-dev: stop-docker-dev-volumes run-docker-dev
 	@echo "Database has been reset!"
 
-.PHONY: build run test clean build-docker run-docker-dev stop-docker-dev run-docker-prod stop-docker reset-db
+.PHONY: build run test clean build-docker run-docker-dev stop-docker-dev run-docker-prod stop-docker reset-docker-dev
